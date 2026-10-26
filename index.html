@@ -1,37 +1,141 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Romance Factory</title>
-<style>
-body{font-family:Arial;background:#fff5f7;text-align:center;
-padding:35px 18px;color:#49313b}
-.card{background:white;padding:28px 20px;border-radius:20px;
-max-width:400px;margin:auto}
-a{display:block;background:#b83260;color:white;padding:16px;
-border-radius:10px;text-decoration:none;margin-top:24px}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fff5f7">
+
+  <title>The Romance Factory | Customer Feedback</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #fff5f7;
+      text-align: center;
+      padding: 35px 18px;
+      color: #49313b;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .card {
+      background: white;
+      padding: 30px 22px;
+      border-radius: 20px;
+      max-width: 400px;
+      width: 100%;
+      box-shadow: 0 6px 24px rgba(100, 40, 60, 0.08);
+    }
+
+    h1 {
+      color: #b83260;
+      font-size: 28px;
+      margin-bottom: 18px;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .count {
+      color: #b83260;
+      font-weight: bold;
+      margin-top: 24px;
+    }
+
+    .button {
+      display: block;
+      background: #b83260;
+      color: white;
+      padding: 16px;
+      border-radius: 10px;
+      text-decoration: none;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    .button:hover {
+      background: #922448;
+    }
+
+    .note {
+      font-size: 13px;
+      color: #786873;
+      margin-top: 18px;
+    }
+  </style>
 </head>
+
 <body>
-<div class="card">
-<h1>Thank You! 🌹</h1>
-<p>Thank you for choosing The Romance Factory.</p>
-<p>We'd love to hear your honest feedback about your experience.</p>
-<p id="count">Opening Google Reviews in 5 seconds...</p>
-<a href="https://maps.app.goo.gl/VaN9nFL9LVVcpTxy5?g_st=ic">⭐ Leave a Google Review</a>
-</div>
-<script>
-let seconds=5;
-const timer=setInterval(()=>{
-seconds--;
-document.getElementById("count").textContent=
-"Opening Google Reviews in "+seconds+" seconds...";
-if(seconds<=0){
-clearInterval(timer);
-window.location.href="YOUR_GOOGLE_REVIEW_LINK";
-}
-},1000);
-</script>
+  <main class="card">
+    <h1>Thank You! 🌹</h1>
+
+    <p>
+      Thank you for choosing
+      <strong>The Romance Factory</strong>.
+    </p>
+
+    <p>
+      We'd love to hear your honest feedback
+      about your experience with us.
+    </p>
+
+    <p id="count" class="count" aria-live="polite">
+      Opening Google Reviews in 5 seconds...
+    </p>
+
+    <a
+      class="button"
+      id="reviewButton"
+      href="https://maps.app.goo.gl/VaN9nFL9LVVcpTxy5?g_st=ic"
+    >
+      ⭐ Leave a Google Review
+    </a>
+
+    <p class="note">
+      If you aren't redirected automatically,
+      tap the button above.
+    </p>
+  </main>
+
+  <script>
+    (function () {
+      const reviewLink =
+        "https://maps.app.goo.gl/VaN9nFL9LVVcpTxy5?g_st=ic";
+
+      const countElement = document.getElementById("count");
+      const reviewButton = document.getElementById("reviewButton");
+
+      // Make sure both links use the same destination.
+      reviewButton.href = reviewLink;
+
+      let seconds = 5;
+
+      const timer = setInterval(function () {
+        seconds--;
+
+        if (seconds <= 0) {
+          clearInterval(timer);
+          countElement.textContent =
+            "Opening Google Reviews now...";
+
+          window.location.assign(reviewLink);
+          return;
+        }
+
+        countElement.textContent =
+          "Opening Google Reviews in " + seconds + " seconds...";
+      }, 1000);
+    })();
+  </script>
 </body>
 </html>
